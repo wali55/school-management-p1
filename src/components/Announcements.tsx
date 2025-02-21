@@ -1,5 +1,3 @@
-"use client";
-
 const Announcements = () => {
   return (
     <div className="bg-white w-full rounded-md p-4">
