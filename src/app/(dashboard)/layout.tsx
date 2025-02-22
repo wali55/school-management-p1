@@ -19,7 +19,7 @@ export default function DashboardLayout({
         <Menu />
       </div>
       {/* right */}
-      <div className="bg-[#F7F8FA] w-[86%] md:w-[92%] lg:w-[83%] xl:w-[86%]">
+      <div className="bg-[#F7F8FA] w-[86%] md:w-[92%] lg:w-[83%] xl:w-[86%] flex flex-col min-h-[900px]">
         <Navbar />
         {children}
       </div>
