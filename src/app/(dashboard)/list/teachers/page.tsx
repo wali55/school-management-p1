@@ -2,6 +2,8 @@ import Pagination from "@/components/Pagination";
 import TableSearch from "@/components/TableSearch";
 import Image from "next/image";
 
+
+
 const TeacherListPage = () => {
   return (
     <div className="bg-white rounded-md p-4 flex-1 m-4 mt-0">
