@@ -57,7 +57,7 @@ const TeacherListPage = () => {
       <td className="hidden lg:table-cell">{item.phone}</td>
       <td className="hidden lg:table-cell">{item.address}</td>
       <td>
-        <div className="items-center gap-2 hidden lg:flex">
+        <div className="hidden lg:flex items-center gap-2">
           <Link href={`/list/teachers/${item.id}`}>
             <button className="size-7 flex items-center justify-center rounded-full bg-waliSky">
               <Image src="/view.png" alt="" width={16} height={16} />
@@ -72,7 +72,7 @@ const TeacherListPage = () => {
       </td>
     </tr>
   );
-
+  
   return (
     <div className="bg-white rounded-md p-4 flex-1 m-4 mt-0">
       {/* Top */}
@@ -96,6 +96,7 @@ const TeacherListPage = () => {
       {/* List */}
       <Table columns={columns} renderRow={renderRow} data={teachersData} />
       {/* Pagination */}
+      
       <Pagination />
     </div>
   );
