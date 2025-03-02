@@ -1,3 +1,4 @@
+import FormModal from "@/components/FormModal";
 import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
@@ -56,15 +57,13 @@ const StudentListPage = () => {
       <td className="hidden lg:table-cell">{item.address}</td>
       <td>
         <div className="flex items-center gap-2">
-          <Link href={`/list/teachers/${item.id}`}>
+          <Link href={`/list/students/${item.id}`}>
             <button className="size-7 flex items-center justify-center rounded-full bg-waliSky">
               <Image src="/view.png" alt="" width={16} height={16} />
             </button>
           </Link>
           {role === "admin" && (
-            <button className="size-7 flex items-center justify-center rounded-full bg-waliPurple">
-              <Image src="/delete.png" alt="" width={16} height={16} />
-            </button>
+            <FormModal table="student" type="delete" id={item.id} />
           )}
         </div>
       </td>
@@ -80,14 +79,12 @@ const StudentListPage = () => {
           <TableSearch />
           <div className="flex items-center gap-4 self-end">
             <button className="size-8 rounded-full bg-waliYellow flex items-center justify-center">
-              <Image src="/filter.png" alt="" height={14} width={14} />
+              <Image src="/filter.png" alt="" height={16} width={16} />
             </button>
             <button className="size-8 rounded-full bg-waliYellow flex items-center justify-center">
-              <Image src="/sort.png" alt="" height={14} width={14} />
+              <Image src="/sort.png" alt="" height={16} width={16} />
             </button>
-            <button className="size-8 rounded-full bg-waliYellow flex items-center justify-center">
-              <Image src="/plus.png" alt="" height={14} width={14} />
-            </button>
+            <FormModal table="student" type="create" />
           </div>
         </div>
       </div>
