@@ -25,7 +25,7 @@ const schema = z.object({
   img: z.instanceof(File, { message: "Image is required!" }),
 });
 
-const TeacherForm = ({
+const StudentForm = ({
   type,
   data,
 }: {
@@ -45,7 +45,7 @@ const TeacherForm = ({
   return (
     <form className="flex flex-col gap-8" onSubmit={onSubmit}>
       <h1 className="text-xl font-semibold">
-        {type === "create" ? "Create a new teacher" : "Update teacher"}
+        {type === "create" ? "Create a new student" : "Update student"}
       </h1>
       <span className="text-xs text-gray-400 font-semibold">
         Authentication Information
@@ -154,4 +154,4 @@ const TeacherForm = ({
   );
 };
 
-export default TeacherForm;
+export default StudentForm;
