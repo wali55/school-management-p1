@@ -48,8 +48,12 @@ const renderRow = (item: TeacherType) => (
       </div>
     </td>
     <td className="hidden md:table-cell">{item.username}</td>
-    <td className="hidden md:table-cell">{item.subjects.map((subject) => subject.name).join(",")}</td>
-    <td className="hidden md:table-cell">{item.classes.map((classItem) => classItem.name).join(",")}</td>
+    <td className="hidden md:table-cell">
+      {item.subjects.map((subject) => subject.name).join(",")}
+    </td>
+    <td className="hidden md:table-cell">
+      {item.classes.map((classItem) => classItem.name).join(",")}
+    </td>
     <td className="hidden lg:table-cell">{item.phone}</td>
     <td className="hidden lg:table-cell">{item.address}</td>
     <td>
@@ -67,31 +71,36 @@ const renderRow = (item: TeacherType) => (
   </tr>
 );
 
-const TeacherListPage = async ({searchParams}: {
-  searchParams: {[key:string]: string | undefined}
+const TeacherListPage = async ({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | undefined };
 }) => {
-  const {page, ...queryParams} = searchParams;
+  const { page, ...queryParams } = searchParams;
   const p = page ? parseInt(page) : 1;
 
   // url params conditions
-  const query: Prisma.TeacherWhereInput  = {};
+  const query: Prisma.TeacherWhereInput = {};
 
   if (queryParams) {
-    for(const [key, value] of Object.entries(queryParams)) {
+    for (const [key, value] of Object.entries(queryParams)) {
       if (value !== undefined) {
         switch (key) {
           case "classId":
             query.lessons = {
               some: {
-                classId: parseInt(value)
-              }
-            }
-          break;
+                classId: parseInt(value),
+              },
+            };
+            break;
           case "search":
             query.name = {
               contains: value,
-              mode: "insensitive"
-            }
+              mode: "insensitive",
+            };
+            break;
+          default:
+            break;
         }
       }
     }
@@ -102,16 +111,16 @@ const TeacherListPage = async ({searchParams}: {
       where: query,
       include: {
         subjects: true,
-        classes: true
+        classes: true,
       },
       take: ITEM_PER_PAGE,
-      skip: ITEM_PER_PAGE * (p - 1)
+      skip: ITEM_PER_PAGE * (p - 1),
     }),
     prisma.teacher.count({
-      where: query
-    })
-  ])
-  
+      where: query,
+    }),
+  ]);
+
   return (
     <div className="bg-white rounded-md p-4 flex-1 m-4 mt-0">
       {/* Top */}
