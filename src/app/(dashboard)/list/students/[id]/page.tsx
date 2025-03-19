@@ -88,7 +88,7 @@ const SingleStudentPage = () => {
                 <div className="mt-4 flex gap-4 flex-wrap text-xs text-gray-500">
                   <Link href={`/list/lessons?classId=${2}`} className="p-3 rounded-md bg-waliSkyLight">Student&apos;s Lessons</Link>
                   <Link href={`/list/teachers?classId=${2}`} className="p-3 rounded-md bg-waliPurpleLight">Student&apos;s Teachers</Link>
-                  <Link href={`/list/exams?classId=${2}`} className="p-3 rounded-md bg-pink-50">Student&apos;s Exams</Link>
+                  <Link href={`/list/exams?classId=${3}`} className="p-3 rounded-md bg-pink-50">Student&apos;s Exams</Link>
                   <Link href="/" className="p-3 rounded-md bg-waliSkyLight">Student&apos;s Assignments</Link>
                   <Link href="/" className="p-3 rounded-md bg-waliYellowLight">Student&apos;s Results</Link>
                 </div>

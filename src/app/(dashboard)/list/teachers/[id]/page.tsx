@@ -89,7 +89,7 @@ const SingleTeacherPage = () => {
                   <Link href={`/list/classes?supervisorId=${"teacher11"}`} className="p-3 rounded-md bg-waliSkyLight">Teacher&apos;s Classes</Link>
                   <Link href={`/list/students?teacherId=${"teacher2"}`} className="p-3 rounded-md bg-waliPurpleLight">Teacher&apos;s Students</Link>
                   <Link href={`/list/lessons?teacherId=${"teacher2"}`} className="p-3 rounded-md bg-waliYellowLight">Teacher&apos;s Lessons</Link>
-                  <Link href={`/list/exams?teacherId=${"teacher2"}`} className="p-3 rounded-md bg-pink-50">Teacher&apos;s Exams</Link>
+                  <Link href={`/list/exams?teacherId=${"teacher3"}`} className="p-3 rounded-md bg-pink-50">Teacher&apos;s Exams</Link>
                   <Link href="/" className="p-3 rounded-md bg-waliSkyLight">Teacher&apos;s Assignments</Link>
                 </div>
               </div>
