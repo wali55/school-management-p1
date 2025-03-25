@@ -38,7 +38,7 @@ const AnnouncementListPage = async ({searchParams}: {
       className="border-b border-gray-200 text-sm even:bg-slate-50 hover:bg-waliPurpleLight"
     >
       <td className="flex items-center gap-4 p-4">{item.title}</td>
-      <td>{item.class.name}</td>
+      <td>{item.class?.name || "-"}</td>
       <td className="hidden md:table-cell">{new Intl.DateTimeFormat("en-Us").format(item.date)}</td>
       <td>
         <div className="flex items-center gap-2">
