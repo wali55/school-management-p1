@@ -108,6 +108,41 @@ const ExamListPage = async ({
     }
   }
 
+  // Role Conditions
+  switch (role) {
+    case "admin":
+      break;
+    case "teacher":
+      query.lesson = {
+        teacherId: userId!
+      }
+      break;
+    case "student":
+      query.lesson = {
+        class: {
+          students: {
+            some: {
+              id: userId!
+            }
+          }
+        }
+      }
+      break;
+    case "parent":
+      query.lesson = {
+        class: {
+          students: {
+            some: {
+              parentId: userId!
+            }
+          }
+        }
+      }
+      break;
+    default:
+      break;
+  }
+
   const [data, count] = await prisma.$transaction([
     prisma.exam.findMany({
       where: query,
