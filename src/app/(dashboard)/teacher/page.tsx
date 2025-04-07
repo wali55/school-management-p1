@@ -1,5 +1,5 @@
 import Announcements from "@/components/Announcements";
-import BigCalendar from "@/components/BigCalendar";
+import BigCalendarContainer from "@/components/BigCalendarContainer";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
 const TeacherPage = () => {
@@ -9,7 +9,7 @@ const TeacherPage = () => {
             <div className="w-full xl:w-[72%]">
               <div className="h-full bg-white rounded-md p-4">
                 <h1 className="text-xl font-semibold">Schedule</h1>
-                <BigCalendar />
+                <BigCalendarContainer />
               </div>
             </div>
             {/* Right */}
