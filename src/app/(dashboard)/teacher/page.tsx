@@ -5,7 +5,6 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 
 const TeacherPage = async () => {
     const {userId} = await auth();
-
     return (
         <div className="flex flex-col xl:flex-row p-4 gap-4 flex-1">
             {/* Left */}
