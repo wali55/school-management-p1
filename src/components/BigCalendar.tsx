@@ -13,6 +13,7 @@ const BigCalendar = ({data}: {data: {title: string; start: Date; end: Date;}[]})
   const handleOnChangeView = (selectedView: View) => {
     setView(selectedView);
   }
+
   return (
       <Calendar
         localizer={localizer}
