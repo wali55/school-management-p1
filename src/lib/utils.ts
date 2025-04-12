@@ -16,16 +16,11 @@ const currentWorkWeek = () => {
 
   startOfWeek.setHours(0, 0, 0, 0);
 
-  const endOfWeek = new Date(startOfWeek);
-  endOfWeek.setDate(endOfWeek.getDate() + 4);
-
-  endOfWeek.setHours(23, 59, 59, 999);
-
-  return { startOfWeek, endOfWeek };
+  return startOfWeek;
 };
 
 export const adjustScheduleToCurrentWeek = (lessons: {title:string;start:Date;end:Date}[]):{title:string;start:Date;end:Date}[] => {
-    const {startOfWeek, endOfWeek} = currentWorkWeek();
+    const startOfWeek = currentWorkWeek();
 
     return lessons.map((lesson) => {
         const lessonDayOfWeek = lesson.start.getDay();
@@ -34,6 +29,12 @@ export const adjustScheduleToCurrentWeek = (lessons: {title:string;start:Date;en
 
         const adjustedStartDate = new Date(startOfWeek);
         adjustedStartDate.setDate(startOfWeek.getDate() + daysFromMonday);
+        adjustedStartDate.setHours(
+          lesson.start.getHours(),
+          lesson.start.getMinutes(),
+          lesson.start.getSeconds()
+        )
+
         const adjustedEndDate = new Date(adjustedStartDate);
         adjustedEndDate.setHours(
             lesson.end.getHours(),
