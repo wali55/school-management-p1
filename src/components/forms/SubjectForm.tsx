@@ -6,12 +6,16 @@ import InputField from "../InputField";
 import { subjectSchema, SubjectSchema } from "@/lib/formValidationSchemas";
 import { createSubject } from "@/lib/actions";
 import { useFormState } from "react-dom";
-import { Span } from "next/dist/trace";
+import { Dispatch, SetStateAction, useEffect } from "react";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const SubjectForm = ({
+  setOpen,
   type,
   data,
 }: {
+  setOpen: Dispatch<SetStateAction<boolean>>;
   type: "create" | "update";
   data?: any;
 }) => {
@@ -27,9 +31,18 @@ const SubjectForm = ({
   })
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
-    createSubject(data);
+    formAction(data);
   });
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (state.success) {
+      toast(`Subject has been ${type === "create" ? "created" : "updated"}!`);
+      setOpen(false);
+      router.refresh();
+    }
+  }, [state]);
 
   return (
     <form className="flex flex-col gap-8" onSubmit={onSubmit}>

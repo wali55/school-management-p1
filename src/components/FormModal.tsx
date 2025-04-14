@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 const TeacherForm = dynamic(() => import("./forms/TeacherForm"), {
   loading: () => <h1>Loading...</h1>
@@ -17,15 +17,6 @@ const ParentForm = dynamic(() => import("./forms/ParentForm"), {
 const SubjectForm = dynamic(() => import("./forms/SubjectForm"), {
   loading: () => <h1>Loading...</h1>
 })
-
-const forms: {
-  [key: string]: (type: "create" | "update", data?: any) => JSX.Element;
-} = {
-  teacher: (type, data) => <TeacherForm type={type} data={data} />,
-  student: (type, data) => <StudentForm type={type} data={data} />,
-  parent: (type, data) => <ParentForm type={type} data={data} />,
-  subject: (type, data) => <SubjectForm type={type} data={data} />,
-};
 
 const FormModal = ({
   table,
@@ -50,6 +41,18 @@ const FormModal = ({
   data?: any;
   id?: number | string;
 }) => {
+  const [open, setOpen] = useState(false);
+  
+  const forms: {
+    [key: string]: (setOpen: Dispatch<SetStateAction<boolean>>, type: "create" | "update", data?: any) => JSX.Element;
+  } = {
+    teacher: (setOpen, type, data) => <TeacherForm setOpen={setOpen} type={type} data={data} />,
+    student: (setOpen, type, data) => <StudentForm setOpen={setOpen} type={type} data={data} />,
+    parent: (setOpen, type, data) => <ParentForm setOpen={setOpen} type={type} data={data} />,
+    subject: (setOpen, type, data) => <SubjectForm setOpen={setOpen} type={type} data={data} />,
+  };
+  
+
   const size = type === "create" ? "size-8" : "size-7";
   const bgColor =
     type === "create"
@@ -57,8 +60,6 @@ const FormModal = ({
       : type === "update"
       ? "bg-waliSky"
       : "bg-waliPurple";
-
-  const [open, setOpen] = useState(false);
 
   const Form = () => {
     return type === "delete" ? (
@@ -71,7 +72,7 @@ const FormModal = ({
         </button>
       </form>
     ) : type === "create" || type === "update" ? (
-      forms[table](type, data)
+      forms[table](setOpen, type, data)
     ) : "Table not found!"
   };
 
