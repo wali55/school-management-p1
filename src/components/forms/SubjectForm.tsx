@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import InputField from "../InputField";
 import { subjectSchema, SubjectSchema } from "@/lib/formValidationSchemas";
-import { createSubject } from "@/lib/actions";
+import { createSubject, updateSubject } from "@/lib/actions";
 import { useFormState } from "react-dom";
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { toast } from "react-toastify";
@@ -25,13 +25,17 @@ const SubjectForm = ({
     formState: { errors },
   } = useForm<SubjectSchema>({ resolver: zodResolver(subjectSchema) });
 
-  const [state, formAction] = useFormState(createSubject, {
-    success: false,
-    error: false
-  })
+  const [state, formAction] = useFormState(
+    type === "create" ? createSubject : updateSubject,
+    {
+      success: false,
+      error: false,
+    }
+  );
 
   const onSubmit = handleSubmit((data) => {
     formAction(data);
+    console.log("data", data);
   });
 
   const router = useRouter();
@@ -58,7 +62,19 @@ const SubjectForm = ({
           error={errors.name}
         />
       </div>
-      {state.error && <span className="text-xs text-red-500">Something went wrong!</span>}
+      {data && (
+        <InputField
+          label="Id"
+          name="id"
+          defaultValue={data?.id}
+          register={register}
+          error={errors?.id}
+          hidden
+        />
+      )}
+      {state.error && (
+        <span className="text-xs text-red-500">Something went wrong!</span>
+      )}
       <button className="bg-blue-400 text-white p-2 rounded-md">
         {type === "create" ? "Create" : "Update"}
       </button>

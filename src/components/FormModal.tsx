@@ -52,6 +52,7 @@ const FormModal = ({
     subject: (setOpen, type, data) => <SubjectForm setOpen={setOpen} type={type} data={data} />,
   };
   
+  console.log("data form model", data);
 
   const size = type === "create" ? "size-8" : "size-7";
   const bgColor =

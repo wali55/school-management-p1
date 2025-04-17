@@ -19,3 +19,19 @@ export const createSubject = async (currentState: CurrentState, data: SubjectSch
   }
 };
 
+export const updateSubject = async (currentState: CurrentState, data: SubjectSchema) => {
+  try {
+    await prisma.subject.update({
+      where: {
+        id: data.id,
+      },
+      data: {
+        name: data.name,
+      },
+    });
+    return { success: true, error: false };
+  } catch (error) {
+    console.log(error);
+    return { success: false, error: true };
+  }
+};
