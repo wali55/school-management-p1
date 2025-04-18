@@ -14,10 +14,12 @@ const SubjectForm = ({
   setOpen,
   type,
   data,
+  relatedData,
 }: {
   setOpen: Dispatch<SetStateAction<boolean>>;
   type: "create" | "update";
   data?: any;
+  relatedData?: any;
 }) => {
   const {
     register,
@@ -35,7 +37,6 @@ const SubjectForm = ({
 
   const onSubmit = handleSubmit((data) => {
     formAction(data);
-    console.log("data", data);
   });
 
   const router = useRouter();
@@ -47,6 +48,8 @@ const SubjectForm = ({
       router.refresh();
     }
   }, [state]);
+
+  const { teachers } = relatedData;
 
   return (
     <form className="flex flex-col gap-8" onSubmit={onSubmit}>
@@ -61,17 +64,37 @@ const SubjectForm = ({
           register={register}
           error={errors.name}
         />
+
+        {data && (
+          <InputField
+            label="Id"
+            name="id"
+            defaultValue={data?.id}
+            register={register}
+            error={errors?.id}
+            hidden
+          />
+        )}
+
+        <div className="flex flex-col gap-2 w-full md:w-1/4">
+          <label className="text-xs text-gray-500">Teachers</label>
+          <select
+            multiple
+            {...register("teachers")}
+            className="border border-gray-300 p-2 rounded-md w-full text-sm"
+            defaultValue={data?.teachers}
+          >
+            {teachers.map(
+              (teacher: { id: string; name: string; surname: string }) => (
+                <option value={teacher.id} key={teacher.id}>{teacher.name + " " + teacher.surname}</option>
+              )
+            )}
+          </select>
+          {errors.teachers?.message && (
+            <p className="text-xs text-red-400">{errors.teachers?.message}</p>
+          )}
+        </div>
       </div>
-      {data && (
-        <InputField
-          label="Id"
-          name="id"
-          defaultValue={data?.id}
-          register={register}
-          error={errors?.id}
-          hidden
-        />
-      )}
       {state.error && (
         <span className="text-xs text-red-500">Something went wrong!</span>
       )}
