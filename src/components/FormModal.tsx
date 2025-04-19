@@ -1,6 +1,6 @@
 "use client";
 
-import { deleteSubject } from "@/lib/actions";
+import { deleteClass, deleteSubject } from "@/lib/actions";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -22,10 +22,13 @@ const ParentForm = dynamic(() => import("./forms/ParentForm"), {
 const SubjectForm = dynamic(() => import("./forms/SubjectForm"), {
   loading: () => <h1>Loading...</h1>
 })
+const ClassForm = dynamic(() => import("./forms/ClassForm"), {
+  loading: () => <h1>Loading...</h1>
+})
 
 const deleteActionMap = {
   subject: deleteSubject,
-  class: deleteSubject,
+  class: deleteClass,
   teacher: deleteSubject,
   student: deleteSubject,
   parent: deleteSubject,
@@ -54,6 +57,7 @@ const FormModal = ({
     student: (setOpen, type, data) => <StudentForm setOpen={setOpen} type={type} data={data} relatedData={relatedData} />,
     parent: (setOpen, type, data) => <ParentForm setOpen={setOpen} type={type} data={data} relatedData={relatedData} />,
     subject: (setOpen, type, data, relatedData) => <SubjectForm setOpen={setOpen} type={type} data={data} relatedData={relatedData} />,
+    class: (setOpen, type, data, relatedData) => <ClassForm setOpen={setOpen} type={type} data={data} relatedData={relatedData} />,
   };
   
   const size = type === "create" ? "size-8" : "size-7";
