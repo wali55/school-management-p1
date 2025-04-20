@@ -54,7 +54,7 @@ const ClassForm = ({
   return (
     <form className="flex flex-col gap-8" onSubmit={onSubmit}>
       <h1 className="text-xl font-semibold">
-        {type === "create" ? "Create a new Class" : "Update the Class"}
+        {type === "create" ? "Create a new class" : "Update the class"}
       </h1>
       <div className="flex justify-between gap-4 flex-wrap">
         <InputField
@@ -93,7 +93,7 @@ const ClassForm = ({
           >
             {teachers.map(
               (teacher: { id: string; name: string; surname: string }) => (
-                <option value={teacher.id} key={teacher.id}>{teacher.name + " " + teacher.surname}</option>
+                <option value={teacher.id} key={teacher.id} selected={data && teacher.id === data.supervisorId}>{teacher.name + " " + teacher.surname}</option>
               )
             )}
           </select>
@@ -111,7 +111,7 @@ const ClassForm = ({
           >
             {grades.map(
               (grade: { id: number; level: number }) => (
-                <option value={grade.id} key={grade.id}>{grade.level}</option>
+                <option value={grade.id} key={grade.id} selected={data && grade.id === data.gradeId}>{grade.level}</option>
               )
             )}
           </select>
