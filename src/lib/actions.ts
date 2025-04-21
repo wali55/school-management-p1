@@ -140,7 +140,7 @@ export const updateTeacher = async (currentState: CurrentState, data: TeacherSch
     if (!data.id) {
       return {success: false, error: true}
     }
-    const user = (await clerkClient()).users.updateUser(data.id, {
+    (await clerkClient()).users.updateUser(data.id, {
       username: data.username,
       ...(data.password !== "" && {password: data.password}),
       firstName: data.name,
@@ -165,7 +165,7 @@ export const updateTeacher = async (currentState: CurrentState, data: TeacherSch
         sex: data.sex,
         birthday: data.birthday,
         subjects: {
-          connect: data.subjects?.map((subjectId: string) => ({id: parseInt(subjectId)}))
+          set: data.subjects?.map((subjectId: string) => ({id: parseInt(subjectId)}))
         },
       }
     });
@@ -181,7 +181,7 @@ export const deleteTeacher = async (currentState: CurrentState, data: FormData) 
   try {
     await prisma.teacher.delete({
       where: {
-        id: parseInt(id)
+        id: id,
       }
     })
     return {success: true, error: false}

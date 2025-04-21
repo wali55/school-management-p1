@@ -1,5 +1,6 @@
 import Announcements from "@/components/Announcements";
 import BigCalendar from "@/components/BigCalendar";
+import BigCalendarContainer from "@/components/BigCalendarContainer";
 import FormContainer from "@/components/FormContainer";
 import Performance from "@/components/Performance";
 import { prisma } from "@/lib/prisma";
@@ -29,7 +30,7 @@ const SingleTeacherPage = async ({params: {id}}: {params: {id: string}}) => {
       return notFound();
     }
 
-    const {sessionClaims} = await auth();
+    const {sessionClaims, userId} = await auth();
     const role = (sessionClaims?.metadata as {role?:string})?.role;
 
     return (
@@ -108,7 +109,7 @@ const SingleTeacherPage = async ({params: {id}}: {params: {id: string}}) => {
               {/* Bottom */}
               <div className="mt-4 bg-white rounded-md p-4 h-[800px]">
                 <h1 className="text-xl font-semibold">Teacher&apos;s Schedule</h1>
-                <BigCalendar />
+                <BigCalendarContainer type="teacherId" id={userId!} />
               </div>
             </div>
             {/* Right */}

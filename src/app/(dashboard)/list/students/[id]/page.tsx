@@ -1,10 +1,13 @@
 import Announcements from "@/components/Announcements";
-import BigCalendar from "@/components/BigCalendar";
+import BigCalendarContainer from "@/components/BigCalendarContainer";
 import Performance from "@/components/Performance";
+import { auth } from "@clerk/nextjs/server";
 import Image from "next/image";
 import Link from "next/link";
 
-const SingleStudentPage = () => {
+const SingleStudentPage = async () => {
+    const {sessionClaims, userId} = await auth();
+    const role = (sessionClaims?.metadata as {role?:string})?.role;
     return (
         <div className="flex-1 p-4 flex flex-col xl:flex-row gap-4">
             {/* Left */}
@@ -78,7 +81,7 @@ const SingleStudentPage = () => {
               {/* Bottom */}
               <div className="mt-4 bg-white rounded-md p-4 h-[800px]">
                 <h1 className="text-xl font-semibold">Student&apos;s Schedule</h1>
-                <BigCalendar />
+                <BigCalendarContainer type="classId" id={userId!} />
               </div>
             </div>
             {/* Right */}
