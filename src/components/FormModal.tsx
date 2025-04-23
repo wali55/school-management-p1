@@ -53,8 +53,6 @@ const FormModal = ({
     [key: string]: (setOpen: Dispatch<SetStateAction<boolean>>, type: "create" | "update", data?: any, relatedData?: any) => JSX.Element;
   } = {
     teacher: (setOpen, type, data) => <TeacherForm setOpen={setOpen} type={type} data={data} relatedData={relatedData} />,
-    student: (setOpen, type, data) => <StudentForm setOpen={setOpen} type={type} data={data} relatedData={relatedData} />,
-    parent: (setOpen, type, data) => <ParentForm setOpen={setOpen} type={type} data={data} relatedData={relatedData} />,
     subject: (setOpen, type, data, relatedData) => <SubjectForm setOpen={setOpen} type={type} data={data} relatedData={relatedData} />,
     class: (setOpen, type, data, relatedData) => <ClassForm setOpen={setOpen} type={type} data={data} relatedData={relatedData} />,
   };
