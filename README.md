@@ -16,10 +16,10 @@ A full-stack school management web application built with **Next.js**, **Prisma*
 
 ## 👥 User Roles
 
-- **Admin:** Full access to manage users, classes, results, announcements, and reports.
-- **Teacher:** Manage class schedules, student results, attendance.
-- **Student:** View personal info, results, class routines.
-- **Parent:** Monitor student performance, attendance.
+- **Admin:** (username: admin, password: admin) Full access to manage users, classes, results, announcements, and reports.
+- **Teacher:** (username: teacher, password: teacher) Manage class schedules, student results, attendance.
+- **Student:** (username: student, password: student) View personal info, results, class routines.
+- **Parent:** (username: parent, password: parent) Monitor student performance, attendance.
 
 ---
 
